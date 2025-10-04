@@ -25,7 +25,7 @@
         {
           # Override SD image settings for RK1/RK3588 with automatic bootloader injection
           sdImage = {
-            imageBaseName = "nixos-rk1";
+            image.baseName = "nixos-rk1";
             # Expand root partition to fill available space (good for eMMC)
             expandOnBoot = true;
 
