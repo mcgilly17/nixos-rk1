@@ -43,8 +43,12 @@ tpi flash -n 1 -i result/sd-image/nixos-rk1-aarch64-linux.img
 
 1. Power on the RK1 module: `tpi power on --node 1`
 2. SSH in: `ssh root@<ip-address>` (password: `nixos123`)
-3. Set unique hostname: `hostnamectl set-hostname rk1-node1`
-4. Apply your own configuration management
+3. **IMPORTANT**: Change the default password immediately:
+   ```bash
+   passwd root  # Set a secure password
+   ```
+4. Set unique hostname: `hostnamectl set-hostname rk1-node1`
+5. Apply your own configuration management
 
 ## Technical Details
 
