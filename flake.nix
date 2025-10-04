@@ -1,6 +1,10 @@
 {
   description = "NixOS disk image for RK1/RK3588 eMMC flashing";
 
+  nixConfig = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
