@@ -2,5 +2,9 @@
 result
 result-*
 
+# Built images
+*.img
+*.img.zst
+
 # Nix lock file (optional - you may want to commit this)
 # flake.lock
