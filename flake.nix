@@ -23,9 +23,14 @@
         "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         ./configuration.nix
         {
+          # Set image name
+          image.baseName = "nixos-rk1";
+
+          # Disable ZFS (broken with latest kernel)
+          boot.supportedFilesystems.zfs = nixpkgs.lib.mkForce false;
+
           # Override SD image settings for RK1/RK3588 with automatic bootloader injection
           sdImage = {
-            image.baseName = "nixos-rk1";
             # Expand root partition to fill available space (good for eMMC)
             expandOnBoot = true;
 
