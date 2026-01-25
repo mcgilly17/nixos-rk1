@@ -26,7 +26,38 @@ tpi flash -n 1 -i result/sd-image/nixos-rk1-aarch64-linux.img
 - SSH enabled with root access (password: `nixos123`)
 - Container support (Podman) for Kubernetes
 - Hardware monitoring and thermal management
+- Storage prerequisites for K3s (Longhorn/NFS ready)
 - Generic hostname (set unique names after deployment)
+
+## Thermal Management
+
+Fan control is automatic via the kernel thermal subsystem. The RK3588 device tree defines cooling trip points:
+
+| Temperature | Fan Speed |
+|-------------|-----------|
+| < 45°C      | Off       |
+| 45°C        | Low       |
+| 50°C        | Medium    |
+| 60°C        | High      |
+| 70°C        | Maximum   |
+
+No configuration needed - the kernel handles fan control automatically.
+
+Use `stress-ng` for thermal testing:
+```bash
+stress-ng --cpu 8 --timeout 60s  # Stress all cores for 60 seconds
+watch sensors                     # Monitor temperatures
+```
+
+## Storage Prerequisites
+
+This image includes prerequisites for Kubernetes persistent storage:
+
+- **iSCSI initiator** - Required for Longhorn distributed storage
+- **NFS client** - For NFS-based persistent volumes
+- **NVMe tools** - For local NVMe drive management
+
+The iSCSI initiator name is pre-configured as `iqn.2025-01.com.turingpi:rk1`.
 
 ## Building Requirements
 

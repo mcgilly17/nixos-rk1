@@ -17,6 +17,7 @@
     "rockchip_saradc"
     "panfrost"  # GPU driver
     "fusb302"  # USB-C controller
+    "nvme"  # NVMe storage support
   ];
 
   # Boot loader configuration for ARM64
@@ -51,6 +52,12 @@
     };
   };
 
+  # iSCSI initiator for Longhorn storage support
+  services.openiscsi = {
+    enable = true;
+    name = "iqn.2025-01.com.turingpi:rk1";
+  };
+
   # Set root password for testing (change this!)
   users.users.root.password = "nixos123";
 
@@ -65,6 +72,10 @@
     # Storage tools - compatible with ARM64
     hdparm
     smartmontools
+    nvme-cli  # NVMe drive management
+    nfs-utils  # NFS client for shared storage
+    # Thermal testing
+    stress-ng
     # Network testing
     iperf3
     tcpdump
